@@ -1,5 +1,6 @@
 const Port = require('../lib/port');
 const assert = require('assert');
+const sinon = require('sinon');
 
 describe('input-port', function () {
   it('should be constractable with name properly set', function () {
@@ -15,6 +16,23 @@ describe('input-port', function () {
     });
 
     //recieve data (this should trigger 'data' event)
+    assert.doesNotThrow(port1.set.bind(port1, 'sample data'));
+  });
+
+  it('should throw "busy" exception when 2 set call are made back to back without ready in between', () => {
+    const port1 = new Port('port1');
+
+    //recieve data (this should trigger 'data' event)
+    assert.doesNotThrow(port1.set.bind(port1, 'sample data'));
+    assert.throws(port1.set.bind(port1, 'sample data'));
+  });
+
+  it('should NOT throw "busy" exception when 2 set call are made back to back with ready in between', () => {
+    const port1 = new Port('port1');
+
+    //recieve data (this should trigger 'data' event)
+    assert.doesNotThrow(port1.set.bind(port1, 'sample data'));
+    port1.ready();
     assert.doesNotThrow(port1.set.bind(port1, 'sample data'));
   });
 });
