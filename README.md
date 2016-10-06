@@ -1,5 +1,5 @@
 # pravaah.js
-[![Build Status](https://travis-ci.org/daveamit/pravaah.js.svg?branch=develop)](https://travis-ci.org/daveamit/pravaah.js) [![Coverage Status](https://coveralls.io/repos/<account>/<repository>/badge.svg?branch=master)](https://coveralls.io/r/<account>/<repository>?branch=master)
+[![Build Status](https://travis-ci.org/daveamit/pravaah.js.svg?branch=develop)](https://travis-ci.org/daveamit/pravaah.js) [![Coverage Status](https://coveralls.io/repos/github/daveamit/pravaah.js/badge.svg)](https://coveralls.io/github/daveamit/pravaah.js)
 
 Get started.
 
