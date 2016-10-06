@@ -90,8 +90,8 @@ describe('Connection', function () {
 
   it('should throw buffer full error', () => {
 
-    const sourcePort = new Port('out');
-    const destinationPort = new Port('in-box1');
+    const sourcePort = new Port('out (source)');
+    const destinationPort = new Port('in-box1 (destination)');
 
     //Skip init in constructor. Will have to call init manually.
     const connection = new Connection('Connection1', sourcePort, destinationPort);
@@ -103,14 +103,124 @@ describe('Connection', function () {
     connection.maxBuffer = 2;
 
     //Write some data to source port, this should trigger set of all destination ports
-    sourcePort.set(data); sourcePort.ready(); // 1
-    sourcePort.set(data); sourcePort.ready(); // 2
-
+    sourcePort.set(data); // 1
+    sourcePort.set(data); // 2
 
     //make sure that 3rd call throws exception
     assert.throws(sourcePort.set.bind(sourcePort, data));
+  });
 
 
+  it('should throw error when trying to connect to null port (source and destination)', () => {
+    //Skip init in constructor. Will have to call init manually.
+    //Notice we have not passed any ports.
+    const connection = new Connection('Connection1', undefined, undefined, true);
+
+    assert.throws(connection.connectSourcePort.bind(connection, undefined));
+    assert.throws(connection.connectDestinationPort.bind(connection, undefined));
+  });
+
+  it('should not recieve data once source port is disconnected', () => {
+
+    const sourcePort = new Port('out (source)');
+    const destinationPort = new Port('in-box1 (destination)');
+
+    //Skip init in constructor. Will have to call init manually.
+    const connection = new Connection('Connection1', sourcePort, destinationPort);
+    const data = {
+      'sample': 'data'
+    };
+
+    const handleSourceDataDeligate = sinon.spy(connection, 'handleSourceData');
+    destinationPort.set = sinon.spy(destinationPort, 'set');
+
+    connection.disconnectSourcePort();
+
+    //Write some data to source port, this should trigger set of all destination ports if connected
+    sourcePort.set(data); // 1
+
+    //make handler was not call
+    assert(handleSourceDataDeligate.notCalled, 'Handler called even after disconnecting the SourcePort');
+    //make sure destinationPort did not recieve anything
+    assert(destinationPort.set.notCalled, 'Handler called even after disconnecting the SourcePort');
 
   });
+
+  it('should not send output data once destination port is disconnected', () => {
+
+    const sourcePort = new Port('out (source)');
+    const destinationPort = new Port('in-box1 (destination)');
+
+    //Skip init in constructor. Will have to call init manually.
+    const connection = new Connection('Connection1', sourcePort, destinationPort, true);
+    const data = {
+      'sample': 'data'
+    };
+
+    const handleSourceDataDeligate = sinon.spy(connection, 'handleSourceData');
+    destinationPort.set = sinon.spy(destinationPort, 'set');
+
+    //Initialize the connection as we skipped while construction the object.
+    connection.init();
+
+    connection.disconnectDestinationPort();
+
+    //Write some data to source port, this should trigger set of all destination ports if connected
+    //this is expected to throw error saying output is not connected.
+    assert.throws(sourcePort.set.bind(sourcePort, data), 'If destinationPort is disconnected, setting source data should throw error'); // 1
+
+    //make handler should get called with data
+    assert(handleSourceDataDeligate.calledWith(connection, data), 'Handler did not called even though source port is connected');
+
+    //make sure destinationPort did not recieve anything
+    assert(destinationPort.set.notCalled, 'Handler called even after destinationPort is disconnected');
+
+  });
+
+
+  it('should be able to send data if destination port is already ready. (queue is empty)', () => {
+
+    const sourcePort = new Port('out (source)');
+    const destinationPort = new Port('in-box1 (destination)');
+
+    //Skip init in constructor. Will have to call init manually.
+    const connection = new Connection('Connection1', sourcePort, destinationPort, true);
+    const data = {
+      'sample': 'data'
+    };
+
+    const handleSourceDataDeligate = sinon.spy(connection, 'handleSourceData');
+    destinationPort.set = sinon.spy(destinationPort, 'set');
+
+    //Initialize the connection as we skipped while construction the object.
+    connection.init();
+
+    //Destination port gets ready (the queue is empty now)
+    destinationPort.ready();
+
+    //Make destination port busy
+    destinationPort.isReady = false;
+
+    //Write data so it will get queued
+    sourcePort.set(data);
+
+    //make handler should get called with data
+    assert(handleSourceDataDeligate.calledWith(connection, data), 'Handler did not called even though source port is connected');
+
+    //make sure destinationPort DID not recieves data
+    assert(destinationPort.set.notCalled, 'destinationPort recieved data even when busy');
+
+    handleSourceDataDeligate.reset();
+
+    destinationPort.ready();
+
+
+    //make handler should NOT get called
+    assert(handleSourceDataDeligate.notCalled, 'Handler called 2nd time on OnReady event of destination-port');
+
+    //make sure destinationPort recieves data
+    assert(destinationPort.set.calledWith(data), 'destinationPort data not set even after everything is connected');
+
+  });
+
 });
