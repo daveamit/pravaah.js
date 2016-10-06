@@ -1,6 +1,6 @@
 {
   "name": "pravaah.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Flow-Based workflow engine",
   "main": "index.js",
   "scripts": {
