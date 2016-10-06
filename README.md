@@ -1,4 +1,5 @@
-# pravaah.js
+# pravaah.js 
+[![Build Status](https://travis-ci.org/daveamit/pravaah.js.svg?branch=develop)](https://travis-ci.org/daveamit/pravaah.js)
 
 Get started.
 
