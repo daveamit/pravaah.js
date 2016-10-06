@@ -1,3 +1,5 @@
+"use strict";
+
 const Connection = require('../lib/connection');
 const Port = require('../lib/port');
 const assert = require('assert');

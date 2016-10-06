@@ -1,3 +1,5 @@
+"use strict";
+
 const Port = require('../lib/port');
 const assert = require('assert');
 const sinon = require('sinon');
