@@ -13,7 +13,7 @@ describe('input-port', function () {
 
     //Listen for data on port
     port1.on('data', (data) => {
-      assert.equal(data, 'sample data')
+      assert.equal(data, 'sample data');
       done();
     });
 
