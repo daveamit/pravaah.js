@@ -12,6 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/daveamit/pravaah.js.git"
   },
+  "bin":{
+    "pravaah": "./pravaah"
+  },
   "keywords": [
     "flow-based",
     "workflow",

@@ -1,7 +1,10 @@
 language: node_js
 node_js:
-  - "6"
-  - "6.1"
-  - "5.11"
-  - "4.6"
-after_success: 'npm run coveralls'
+- '6'
+- '6.1'
+- '5.11'
+- '4.6'
+after_success: npm run coveralls
+deploy:
+  api_key:
+    secure: poOa96gxrOJY3+bIDZ7B4PLJtT/cZ4YgUVMtWbgPY8PeOFkm/52DtTCjXFusXzpwA7M1z2LEjmHopAhsZd80+CVAA6bAur9FmwEG4vSU8gUil4ZcnAu7Bdv6f4Iboh6SuZaaO/qEusNWnVWXWOGPTGK7RbSHZA7F/8DVPpNb8EDiscjeq0x+rfqat4SpUz0Cj5s2GnIkbWlRaP+eD60syekGUvOhojL5+2Y+whwrX2iMnl2BZQ6LCfdp12jynwgozLjQvcXS1ZY/bGglnuDJJj9gTC9Pr4T/AYt3HvJ5swIxC5YoEEH4UJ0cXCbWsyx8awR5WS6aZSyJZbFN/6WM1gglAUpC4GVnk1eBoDc8bBm6bI3+x7VEr0LCeUxUzYMpTjIfLm0xdJR4MK8exERkamq9/CVQPlmfVv1YOfGHt3osct85PRW+Rm62hWpl76qaOnHCNup+LYf3Vy9WKgJoIamkZDM4pUlrJsRAq15pRwHCP7Yw10pZRTMbkimb8ScpYAbdEHsgKEO3KCCc+6VgWgHV2f/OoB+p/ZHTPzYjNVQCdETS/utX+Fo7+0AETukk50BgoSGsBHtyaVZHO7znTLHlOEGECi0d+iUb891eyTY30/o5wSD22ZpuwOsxwUV0lVuDZdmv7FXjjTw97iOBEnkqiXdQNHBWYXPib4nmu1A=
