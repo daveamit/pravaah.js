@@ -1,6 +1,6 @@
 {
   "name": "pravaah.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Flow-Based workflow engine",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/daveamit/pravaah.js.git"
   },
-  "bin":{
+  "bin": {
     "pravaah": "./pravaah"
   },
   "keywords": [
