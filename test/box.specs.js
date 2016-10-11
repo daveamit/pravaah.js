@@ -1,4 +1,7 @@
 "use strict";
+//This is so that es6 feature of default arguments works properly
+//that is used in box.js
+require("babel-core/register");
 
 const Box = require('../lib/box');
 const Port = require('../lib/port');
