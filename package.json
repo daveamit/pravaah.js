@@ -1,42 +1,44 @@
 {
-  "name": "pravaah.js",
-  "version": "0.0.3",
-  "description": "Flow-Based workflow engine",
-  "main": "index.js",
-  "scripts": {
-    "dev": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register --recursive",
-    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
-    "bumpup-version": "npm version patch -m \"Version bumped up to %s\" && git push --follow-tags"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/daveamit/pravaah.js.git"
-  },
-  "bin": {
-    "pravaah": "./pravaah"
-  },
-  "keywords": [
-    "flow-based",
-    "workflow",
-    "engine"
-  ],
-  "author": "daveamit@live.com",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/daveamit/pravaah.js/issues"
-  },
-  "homepage": "https://github.com/daveamit/pravaah.js#readme",
-  "devDependencies": {
-    "babel-core": "^6.17.0",
-    "babel-preset-es2015": "^6.16.0",
-    "coveralls": "^2.11.14",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.1.0",
-    "sinon": "^1.17.6"
-  },
-  "dependencies": {
-    "fifo": "^2.3.0",
-    "lodash": "^4.16.4"
-  }
+    "name": "pravaah.js",
+    "version": "0.0.3",
+    "description": "Flow-Based workflow engine",
+    "main": "index.js",
+    "scripts": {
+        "dev": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register --recursive",
+        "testxx": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha",
+        "test": "node_modules/.bin/babel-node node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha",
+        "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+        "bumpup-version": "npm version patch -m \"Version bumped up to %s\" && git push --follow-tags"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/daveamit/pravaah.js.git"
+    },
+    "bin": {
+        "pravaah": "./pravaah"
+    },
+    "keywords": [
+        "flow-based",
+        "workflow",
+        "engine"
+    ],
+    "author": "daveamit@live.com",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/daveamit/pravaah.js/issues"
+    },
+    "homepage": "https://github.com/daveamit/pravaah.js#readme",
+    "devDependencies": {
+        "babel-cli": "^6.16.0",
+        "babel-core": "^6.17.0",
+        "babel-istanbul": "^0.11.0",
+        "babel-preset-es2015": "^6.16.0",
+        "coveralls": "^2.11.14",
+        "mocha": "^3.1.0",
+        "sinon": "^1.17.6"
+    },
+    "dependencies": {
+        "fifo": "^2.3.0",
+        "lodash": "^4.16.4"
+    }
 }

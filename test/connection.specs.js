@@ -39,7 +39,7 @@ describe('Connection', function() {
 
     });
 
-    it('should be able to communicate data', (done) => {
+    it('should be able to communicate data (async)', (done) => {
 
         const sourcePort = new Port('out');
         const destinationPort = new Port('in-box1');
@@ -105,6 +105,7 @@ describe('Connection', function() {
         //Write some data to source port, this should trigger set of all destination ports
         sourcePort.set(data); // 1
         sourcePort.set(data); // 2
+        sourcePort.ready();
 
         //make sure that 3rd call throws exception
         assert.throws(sourcePort.set.bind(sourcePort, data));

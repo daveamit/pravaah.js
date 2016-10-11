@@ -10,6 +10,7 @@ const assert = require('assert');
 const sinon = require('sinon');
 
 describe('Box', () => {
+
     describe('Should be constractable ', () => {
         const inPort = new Port('in-port');
         const outPortA = new Port('out-port-a');
@@ -17,6 +18,13 @@ describe('Box', () => {
 
         const name = 'Black-box';
         const box = new Box(name, [inPort], [outPortA, outPortB]);
+
+        it('when no params are passed empty box is created', () => {
+            var defaultBox = new Box();
+            assert.equal(defaultBox.name, '<no-name>');
+            assert.deepEqual(defaultBox.inPorts, {});
+            assert.deepEqual(defaultBox.outPorts, {});
+        });
 
         it('with valid name set', function() {
             assert.equal(box.name, name);
