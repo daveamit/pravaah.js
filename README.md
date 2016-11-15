@@ -16,4 +16,4 @@
 * do `npm run test` to run tests and also view code coverage.
 
 
-Happy coding!
+**Happy coding!**
